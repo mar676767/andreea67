@@ -68,8 +68,8 @@ button:active{transform:scale(.97)}
 
 <script>
 const photos = [
- " poze/poza1.jpeg " , " poze/poza2.jpeg " , " poze/poza3.jpeg " , " poze/poza4.jpeg " ," poze/poza5.jpeg " ,
-  " poze/poza6.jpeg "  , " poze/poza7.jpeg "  , " poze/poza8.jpeg " , " poze/poza9.jpeg " , " poze/poza10.jpeg "
+  "poza1.jpeg", "poza2.jpeg", "poza3.jpeg", "poza4.jpeg", "poza5.jpeg",
+  "poza6.jpeg", "poza7.jpeg", "poza8.jpeg", "poza9.jpeg", "poza10.jpeg"
 ];
 const captions = [
  "The diva is 17",
@@ -92,12 +92,12 @@ function start(){
  show();
 }
 function show(){
- const img=document.getElementById("photo");
- img.style.animation="none"; void img.offsetWidth; img.style.animation="appear .45s ease";
- img.src=photos[i];
- document.getElementById("counter").textContent=`${i+1} / ${photos.length}`;
- document.getElementById("caption").textContent=captions[i];
- if(i===photos.length-1) document.getElementById("next").textContent="Finalul 💗";
+  const img = document.getElementById("photo");
+  img.style.animation = "none"; void img.offsetWidth; img.style.animation = "appear .45s ease";
+  img.src = photos[i].trim();
+  document.getElementById("counter").textContent = `${i+1} / ${photos.length}`;
+  document.getElementById("caption").textContent = captions[i];
+  if (i === photos.length - 1) document.getElementById("next").textContent = "Finalul 💗";
 }
 function nextPhoto(){
  if(i < photos.length-1){ i++; show(); }
