@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pentru Andreea ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0; min-height:100vh; overflow:hidden; font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#ffd6e7,#fff0f6,#ffc1dc);
+ color:#7a2450; display:flex; align-items:center; justify-content:center;
+}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.heart{position:absolute;bottom:-30px;font-size:22px;animation:float 7s linear infinite;opacity:.7}
+@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.card{
+ width:min(92vw,520px); min-height:82vh; max-height:94vh; padding:28px 22px;
+ background:rgba(255,255,255,.72); backdrop-filter:blur(12px);
+ border:2px solid rgba(255,255,255,.8); border-radius:30px;
+ box-shadow:0 20px 60px rgba(155,45,93,.18);
+ display:flex; flex-direction:column; align-items:center; justify-content:center;
+ text-align:center; position:relative; z-index:2;
+}
+h1{font-size:clamp(28px,7vw,42px);margin:0 0 14px}
+p{font-size:18px;line-height:1.45;margin:8px 0 20px}
+button{
+ border:0;border-radius:999px;padding:14px 24px;font-size:16px;font-weight:700;
+ color:white;background:#e95c9d;box-shadow:0 8px 20px rgba(233,92,157,.28);
+ cursor:pointer;margin:6px;transition:.2s
+}
+button:active{transform:scale(.97)}
+.small{font-size:13px;opacity:.7}
+#memory{display:none;width:100%}
+.photo-wrap{
+ width:100%; height:min(60vh,520px); display:flex;align-items:center;justify-content:center;
+}
+.photo{
+ max-width:100%;max-height:100%;object-fit:contain;border-radius:20px;
+ box-shadow:0 12px 30px rgba(70,20,45,.2);
+ animation:appear .45s ease;
+}
+@keyframes appear{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.caption{min-height:52px;font-size:19px;font-weight:700;margin:12px 4px 4px}
+.counter{font-size:13px;opacity:.65;margin-bottom:8px}
+.music{display:none;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+
+<div class="card" id="intro">
+  <div style="font-size:55px">🎀</div>
+  <h1>Cu drag, de la prietenele tale,<br>Rebeca și Maria ❤️</h1>
+  <p>Am pregătit ceva pentru tine...</p>
+  <button onclick="start()">Deschide cadoul 💗</button>
+</div>
+
+<div class="card" id="memory">
+  <div class="counter" id="counter"></div>
+  <div class="photo-wrap"><img class="photo" id="photo" src="" alt="Amintire cu Andreea"></div>
+  <div class="caption" id="caption"></div>
+  <div>
+    <button id="next" onclick="nextPhoto()">Următoarea ❤️</button>
+    <button class="music" id="music" onclick="openSong()">🎵 Treat You Better</button>
+  </div>
+</div>
+
+<script>
+const photos = [
+ "poze/poza1.jpeg","poze/poza2.jpeg","poze/poza3.jpeg","poze/poza4.jpeg","poze/poza5.jpeg",
+ "poze/poza6.jpeg","poze/poza7.jpeg","poze/poza8.jpeg","poze/poza9.jpeg","poze/poza10.jpeg"
+];
+const captions = [
+ "începutul dovezilor că nu suntem normale 💀",
+ "noi două + marea = combinație periculoasă 🌊",
+ "aici eram foarte mature, evident 😭",
+ "poza asta chiar trebuia să existe? DA. ❤️",
+ "o seară obișnuită cu noi, adică deloc obișnuită",
+ "când gașca s-a adunat și creierul a plecat 🫶",
+ "noi încercând să părem normale 💀",
+ "Andreea, tu chiar ai 17 ani acum?! 😭",
+ "momente pe care nu le schimbăm pentru nimic ❤️",
+ "și încă avem multe amintiri de făcut 🥹"
+];
+let i=0;
+
+function start(){
+ document.getElementById("intro").style.display="none";
+ document.getElementById("memory").style.display="flex";
+ document.getElementById("music").style.display="inline-block";
+ show();
+}
+function show(){
+ const img=document.getElementById("photo");
+ img.style.animation="none"; void img.offsetWidth; img.style.animation="appear .45s ease";
+ img.src=photos[i];
+ document.getElementById("counter").textContent=`${i+1} / ${photos.length}`;
+ document.getElementById("caption").textContent=captions[i];
+ if(i===photos.length-1) document.getElementById("next").textContent="Finalul 💗";
+}
+function nextPhoto(){
+ if(i < photos.length-1){ i++; show(); }
+ else{
+   document.getElementById("next").style.display="none";
+   document.getElementById("caption").innerHTML="La mulți ani, Andreea! 🎂💗<br>17 ani și încă nu ne-am săturat de tine 😭";
+ }
+}
+function openSong(){
+ window.open("https://www.youtube.com/results?search_query=Treat+You+Better+Shawn+Mendes","_blank");
+}
+for(let j=0;j<18;j++){
+ const h=document.createElement("div"); h.className="heart"; h.textContent=["❤️","💗","💕","🎀"][j%4];
+ h.style.left=(Math.random()*100)+"%"; h.style.animationDelay=(Math.random()*6)+"s";
+ h.style.animationDuration=(5+Math.random()*5)+"s"; document.getElementById("hearts").appendChild(h);
+}
+</script>
+</body>
+</html>
